@@ -1,0 +1,55 @@
+# NetBeans specific files
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Java specific files
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+# Maven specific files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle specific files
+bin/
+.gradle/
+build/
+
+# IntelliJ specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse specific files
+.settings/
+bin/
+tmp/
+.metadata
+.classpath
+.project
+
+# OS specific files
+.DS_Store
+
+# Miscellaneous
+*.log
