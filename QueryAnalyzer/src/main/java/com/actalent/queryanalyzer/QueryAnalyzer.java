@@ -32,17 +32,53 @@ public class QueryAnalyzer {
         
         String [] fields = QueryOperator.extractFields(query);
         System.out.println("Fields extracted from Query: ");
+        if(fields!=null)
         for(String s: fields){
             System.out.println("\t"+s);
         }
         
         // step2.2 -> Extract part after where word before
         //'group by or order by' if they exist in the query
-        String equations = QueryOperator.extractEquations(query);
+        String equations = QueryOperator.extractEquation(query);
+        
         System.out.println("Equation extracted from Query: ");
+        if(equations!=null)
         System.out.println(equations);
         
-        // step 2.3 -> Eplit the equation into individual equation if 'and' || 'or' are present
+        
+        
+        // step 2.3 -> Eplit the equation into conditions equation if 'and' || 
+        //'or' are present
+        String [] conditions = QueryOperator.extractConditions(query);
+        
+        System.out.println("Extracted Conditions:");
+        if(conditions!=null)
+        for(String s: conditions){
+            System.out.println("\t"+s);
+        }
+        //step 3.1 -> extract logical operators
+        
+        String [] logicalOperators= QueryOperator.extractLogicalOperators(query);
+        System.out.println("Extracted Logical Operators:");
+        
+        for(String s: logicalOperators){
+            System.out.println("\t"+s);
+        }
+        // step 3.2 -> extract order by field
+        String orderByField = QueryOperator.extractField(" order by ",query);
+        
+        System.out.println("Extracted Order By field:");
+        System.out.println("\t"+orderByField);
+        
+        
+        //step 4.1 -> extract group by
+        String groupByField=QueryOperator.extractField(" group by ",query);
+        
+        
+        System.out.println("Extracted Group By field:");
+        System.out.println("\t"+groupByField);
+        
+        //step 4.2 ->
         
     }
     

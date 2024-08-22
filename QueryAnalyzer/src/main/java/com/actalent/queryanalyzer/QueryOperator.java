@@ -52,7 +52,7 @@ public class QueryOperator {
                 
                 if(
                     s.contains("select")||
-                    s.contains("SELECT") || s.contains("(") 
+                    s.contains("SELECT") 
                     )
                     continue;
                 ls.add(s.trim());
@@ -70,7 +70,7 @@ public class QueryOperator {
         return fields;
     }
     
-    public static String extractEquations(String query){
+    public static String extractEquation(String query){
         String equation="" ;
         String [] temp = query.split("(?i)\\bwhere\\b");
         if(temp.length<2)
@@ -86,4 +86,62 @@ public class QueryOperator {
         
         return equation;
     }
+    
+    public static String[] extractConditions(String query){
+        String equation = extractEquation(query);
+        if(equation==null){
+            return null;
+        }
+        List<String> ls = new ArrayList<>();
+        
+        String w = equation.toUpperCase();
+        String[] parts = w.split("\\s+AND\\s+|\\s+OR\\s+");
+        return parts;
+        
+    }
+    
+    public static String [] extractLogicalOperators(String query){
+      
+        String [] serializedQuery= serialize(query);
+        int count = 0;
+        for(String s:serializedQuery){
+            if( s.toUpperCase().equals("AND") || s.toUpperCase().equals("OR") 
+                    || s.toUpperCase().equals("NOT")  ){
+                count+=1;
+                
+            }
+        }
+        String [] sol = new String[count];
+        int counter =0;
+        for(String s:serializedQuery){
+            if( s.toUpperCase().equals("AND") || s.toUpperCase().equals("OR") 
+                    || s.toUpperCase().equals("NOT")  ){
+                sol[counter++] = s;
+                
+            }
+        }
+        return sol;
+    }
+    
+    public static String extractField(String field, String query){
+        String res=null;
+        if(query.contains(field.toUpperCase())){
+            String [] t = query.split(field.toUpperCase()) ;
+            if(t.length>1){
+                t= t[1].split(" ");
+               return res;
+            }
+        }
+        if(query.contains(field.toLowerCase())){
+            String [] t = query.split(field.toLowerCase()) ;
+            if(t.length>1){
+                t= t[1].split(" ");
+                res=t[0];
+            }
+        }
+        return res;
+    }
+    
+    
+    
 }
