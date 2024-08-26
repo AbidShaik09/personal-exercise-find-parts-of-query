@@ -21,7 +21,7 @@ public class QueryAnalyzer {
         
        //step1.2 -> extract filename
         String fileName =null;
-        fileName = QueryOperator.getFileName(serializedString);
+        fileName = QueryOperator.getFileName(query);
         System.out.println("File Name: "+fileName);
         
         //step1.3 -> extract base Query
@@ -68,6 +68,7 @@ public class QueryAnalyzer {
         String orderByField = QueryOperator.extractField(" order by ",query);
         
         System.out.println("Extracted Order By field:");
+        if(orderByField!=null)
         System.out.println("\t"+orderByField);
         
         
@@ -76,10 +77,19 @@ public class QueryAnalyzer {
         
         
         System.out.println("Extracted Group By field:");
+        if(groupByField!=null)
         System.out.println("\t"+groupByField);
         
         //step 4.2 ->
+        String []  findFunctions = QueryOperator.extractFunctions(query);
+        System.out.println("Extracted functions:");
         
+        if(findFunctions!=null)
+        for(String s: findFunctions){
+            
+        System.out.println("\t"+s);
+            
+        }
     }
     
 }

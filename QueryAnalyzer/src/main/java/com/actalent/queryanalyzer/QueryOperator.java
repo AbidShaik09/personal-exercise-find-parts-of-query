@@ -17,7 +17,8 @@ public class QueryOperator {
         
         return res;
     }
-    public static String getFileName(String [] serializedString){
+    public static String getFileName(String query){
+        String []  serializedString = serialize(query);
         for(String s : serializedString){
             if(s.contains(".")){
                 return s;
@@ -139,6 +140,33 @@ public class QueryOperator {
                 res=t[0];
             }
         }
+        return res;
+    }
+    
+    public static String[] extractFunctions(String query){
+        String[] res;
+        String [] str = query.toLowerCase().split("\\s+|,+");
+        int count = 0;
+        for(String s:str){
+            if(s.startsWith("min(")||s.startsWith("max(")||
+                    s.startsWith("count(")||s.startsWith("avg(")
+                    ){
+                count++;
+            }
+        }
+        if(count ==0 ){
+            return null;
+        }
+        res = new String[count];
+        int c = 0;
+        for(String s:str){
+            if(s.startsWith("min(")||s.startsWith("max(")||
+                    s.startsWith("count(")||s.startsWith("avg(")
+                    ){
+                res[c++] = s;
+            }
+        }
+        
         return res;
     }
     
