@@ -37,11 +37,19 @@ public class QueryAnalyzerTest {
     public void tearDown() {
     }
     
-//    @Test
-//    public void TestSplit(){
-//        String []serializedString= QueryOperator.serialize(query);
-//        assertEquals("",serializedString);
-//    }
+    @Test
+    public void TestSplit(){
+        String []serializedString= QueryOperator.serialize(query);
+        String [] s = {"select", "name" ,",", "age", "from", "ipl.csv", "group", "by", "winRate"};
+        assertArrayEquals(s,serializedString);
+    }
+    
+    @Test
+    public void TestBaseQuery(){
+        String serializedString= QueryOperator.getBaseQuery(query);
+        String s = "select name , age from ipl.csv group by winRate";
+        assertEquals(s,serializedString);
+    }
     
     // File Name: ipl.csv
     @Test
@@ -50,6 +58,14 @@ public class QueryAnalyzerTest {
         String fileName =null;
         fileName = QueryOperator.getFileName(query);
         assertEquals("ipl.csv",fileName);
+    }
+    @Test
+    public void TestExtractFields(){
+        
+        String[] serializedString= QueryOperator.extractFields(query);
+        String[] s = {"name" ,"age"};
+        assertArrayEquals(s,serializedString);
+        
     }
 
     // TODO add test methods here.
